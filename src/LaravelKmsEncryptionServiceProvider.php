@@ -36,7 +36,7 @@ class LaravelKmsEncryptionServiceProvider extends PackageServiceProvider
 
             return new KmsEncrypter(
                 $client,
-                config('kms-encryption.key'),
+                config('kms-encryption.key_id'),
                 config('kms-encryption.context', [])
             );
         });

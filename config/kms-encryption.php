@@ -8,6 +8,6 @@ return [
     // Associative array of custom encryption's context
     // warning: when changed you won't be able to decrypt previously encrypted data
     'context' => [
-        // 'my secret_key' => 'my_secret_value'
+        // 'my_secret_key' => 'my_secret_value'
     ]
 ];
