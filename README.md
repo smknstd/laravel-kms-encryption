@@ -7,7 +7,13 @@
 
 ## Introduction
 
-This package replaces Laravel's built-in encryption with an encryption based on AWS KMS
+This package replaces Laravel's built-in encryption with an encryption based on AWS KMS.
+
+Two major features provided by kms are:
+- ability to automatically [rotate key](https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) (annually) without deleting the previous ones
+- you don’t have access to the actual key, which means you can’t leak it
+
+_This package has been based on this [blogpost](https://blog.deleu.dev/swapping-laravel-encryption-with-aws-kms/)_
 
 ## Installation
 
@@ -19,13 +25,13 @@ You can install the package via composer:
 composer require smknstd/laravel-kms-encryption
 ```
 
-Next you should publish the config file, and update with your kms key id (previously setup in aws) and context array :
+Next you should publish the config file, and setup your values :
 
 ```bash
-php artisan vendor:publish --provider="Smknstd\LaravelKmsEncryption\LaravelKmsEncryptionServiceProvider" --tag="config"
+php artisan vendor:publish --provider="Smknstd\LaravelKmsEncryption\LaravelKmsEncryptionServiceProvider"
 ```
 
-In your `config/services.php` file, you should setup credentials to the aws user allowed to use the given kms key:
+In your `config/services.php` file, you should setup credentials to the proper aws user [allowed](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-users) to "use" the given kms key:
 
 ```
     'kms' => [
@@ -36,7 +42,6 @@ In your `config/services.php` file, you should setup credentials to the aws user
 ```
 
 Now everytime you'll [encrypt](https://laravel.com/docs/8.x/encryption) something it will use the provided kms key. It includes all fields using eloquent's [encrypted casting](https://laravel.com/docs/8.x/eloquent-mutators#encrypted-casting). If you have previously encrypted data, be aware that you won't be able to decrypt it.
-
 
 ## Testing
 
