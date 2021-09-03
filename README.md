@@ -27,11 +27,13 @@ php artisan vendor:publish --provider="Smknstd\LaravelKmsEncryption\LaravelKmsEn
 
 In your `config/services.php` file setup:
 
-'kms' => [
-    'key' => env('AWS_ACCESS_KEY_ID'),
-    'secret' => env('AWS_SECRET_ACCESS_KEY'),
-    'region' => env('AWS_REGION'),
-],
+```
+    'kms' => [
+        'key' => env('AWS_ACCESS_KEY_ID'),
+        'secret' => env('AWS_SECRET_ACCESS_KEY'),
+        'region' => env('AWS_REGION'),
+    ],
+```
 
 Now everytime you'll [encrypt](https://laravel.com/docs/8.x/encryption) something it will use the provided kms key. It also work with eloquent's [encrypted casting](https://laravel.com/docs/8.x/eloquent-mutators#encrypted-casting).
 
