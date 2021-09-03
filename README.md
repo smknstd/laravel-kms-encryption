@@ -25,7 +25,7 @@ Next you should publish the config file, and update with your kms key id (previo
 php artisan vendor:publish --provider="Smknstd\LaravelKmsEncryption\LaravelKmsEncryptionServiceProvider" --tag="config"
 ```
 
-In your `config/services.php` file setup:
+In your `config/services.php` file, you should setup credentials to the aws user allowed to use the given kms key:
 
 ```
     'kms' => [
@@ -35,7 +35,7 @@ In your `config/services.php` file setup:
     ],
 ```
 
-Now everytime you'll [encrypt](https://laravel.com/docs/8.x/encryption) something it will use the provided kms key. It also work with eloquent's [encrypted casting](https://laravel.com/docs/8.x/eloquent-mutators#encrypted-casting).
+Now everytime you'll [encrypt](https://laravel.com/docs/8.x/encryption) something it will use the provided kms key. It includes all fields using eloquent's [encrypted casting](https://laravel.com/docs/8.x/eloquent-mutators#encrypted-casting). If you have previously encrypted data, be aware that you won't be able to decrypt it.
 
 
 ## Testing
