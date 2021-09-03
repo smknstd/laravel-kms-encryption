@@ -23,7 +23,6 @@ class LaravelKmsEncryptionServiceProvider extends PackageServiceProvider
     public function packageRegistered()
     {
         $this->app->singleton(KmsEncrypter::class, function () {
-
             $client = $this->app->make(KmsClient::class);
 
             return new KmsEncrypter(
