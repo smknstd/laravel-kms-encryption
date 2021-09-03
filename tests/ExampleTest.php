@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace Smknstd\LaravelKmsEncryption\Tests;
 
 class ExampleTest extends TestCase
 {
