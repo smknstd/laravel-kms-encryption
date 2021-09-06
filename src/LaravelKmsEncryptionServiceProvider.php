@@ -22,14 +22,22 @@ class LaravelKmsEncryptionServiceProvider extends PackageServiceProvider
 
     public function packageRegistered()
     {
-        $this->app->bind(KmsClient::class, fn () => new KmsClient([
+        $clientParams = [
             'version' => '2014-11-01',
-            'credentials' => [
+        ];
+
+        if (config('services.kms.key') && config('services.kms.secret')) {
+            $clientParams['credentials'] = [
                 'key' => config('services.kms.key'),
                 'secret' => config('services.kms.secret'),
-            ],
-            'region' => config('services.kms.region'),
-        ]));
+            ];
+        }
+
+        if (config('services.kms.region')) {
+            $clientParams['region'] = config('services.kms.region');
+        }
+
+        $this->app->bind(KmsClient::class, fn () => new KmsClient($clientParams));
 
         $this->app->singleton(KmsEncrypter::class, function () {
             $client = $this->app->make(KmsClient::class);

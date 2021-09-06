@@ -31,7 +31,7 @@ Next you should publish the config file, and setup your values :
 php artisan vendor:publish --provider="Smknstd\LaravelKmsEncryption\LaravelKmsEncryptionServiceProvider"
 ```
 
-In your `config/services.php` file, you should setup credentials to the proper aws user [allowed](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-users) to "use" the given kms key:
+If you want to use IAM Roles that are already setup, aws sdk will automatically use them by default. Otherwise, you should setup credentials to the proper aws user [allowed](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-users) to "use" the given kms key, by adding a kms section in your `config/services.php` file :
 
 ```
     'kms' => [
