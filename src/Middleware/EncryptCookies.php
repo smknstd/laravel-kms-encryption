@@ -15,7 +15,8 @@ class EncryptCookies extends LaravelEncryptCookies
      */
     public function __construct()
     {
-
+        // after a security fix https://blog.laravel.com/laravel-cookie-security-releases
+        // EncryptCookies needs the encrypter to have a getKey() method, which cannot work with kms
         $this->encrypter = new Encrypter(
             $this->parseKey(config('app.key')),
             config('app.cipher')
