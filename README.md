@@ -43,15 +43,24 @@ If you want to use IAM Roles that are already setup, aws sdk will automatically 
 
 Now everytime you'll [encrypt](https://laravel.com/docs/8.x/encryption) something it will use the provided kms key. It includes all fields using eloquent's [encrypted casting](https://laravel.com/docs/8.x/eloquent-mutators#encrypted-casting). If you have previously encrypted data, be aware that you won't be able to decrypt it.
 
+### Cookies encryption
+
+If you use laravel's middleware `EncryptCookies`, it can't work with kms. To let the middleware continue working with laravel's encrypter you need to edit `App\Http\kernel.php`. Just replace the existing middleware with :
+
+```
+   protected $middlewareGroups = [
+     'web' => [
+         \Smknstd\LaravelKmsEncryption\Middleware\EncryptCookies::class,
+         ...
+     ]
+   ]
+```
+
 ## Testing
 
 ```bash
 composer test
 ```
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## Contributing
 

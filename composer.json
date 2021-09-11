@@ -2,9 +2,10 @@
     "name": "smknstd/laravel-kms-encryption",
     "description": "Replace Laravel's built-in encryption with an encryption based on AWS KMS",
     "keywords": [
-        "smknstd",
         "laravel",
-        "laravel-kms-encryption"
+        "encryption",
+        "kms",
+        "aws"
     ],
     "homepage": "https://github.com/smknstd/laravel-kms-encryption",
     "license": "MIT",
